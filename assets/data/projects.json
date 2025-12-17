@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Adipurush FX",
+    "image": "/assets/projects/adipurush.jpg",
+    "description": "Visual effects work for the epic film Adipurush.",
+    "category": "VFX"
+  },
+  {
+    "title": "CTR Thumbnail",
+    "image": "/assets/projects/ctr-thumbnail.jpg",
+    "description": "High-converting YouTube thumbnails.",
+    "category": "Thumbnails"
+  },
+  {
+    "title": "Machan Bro",
+    "image": "/assets/projects/machan-bro.jpg",
+    "description": "Complete video editing for a popular YouTube series.",
+    "category": "Video Editing"
+  },
+  {
+    "title": "Comic Con",
+    "image": "/assets/projects/comic-con.jpg",
+    "description": "Event coverage and cinematic edits.",
+    "category": "Video Editing"
+  }
+]
