@@ -379,32 +379,8 @@
                 </div>
                 
                 <!-- ======== Hero Projects Grid ======== -->
-                <div class="hero-projects-grid">
-                    <div class="hero-project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=Adipurush+FX" alt="Adipurush vs Kalki Project">
-                        <div class="hero-project-overlay">
-                            <h4>Adipurush vs Kalki FX Breakdown</h4>
-                        </div>
-                    </div>
-                    <div class="hero-project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=CTR+Thumbnail" alt="High CTR Thumbnail Project">
-                        <div class="hero-project-overlay">
-                            <h4>High CTR Thumbnail Design</h4>
-                        </div>
-                    </div>
-                    <div class="hero-project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=Machan+Bro" alt="Machan Bro Mission Project">
-                        <div class="hero-project-overlay">
-                            <h4>Machan Bro Mission</h4>
-                        </div>
-                    </div>
-                    <div class="hero-project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=Comic+Con" alt="Chennai Comic Con Project">
-                        <div class="hero-project-overlay">
-                            <h4>Chennai Comic Con 2025</h4>
-                        </div>
-                    </div>
-                </div>
+                <div class="hero-projects-grid" id="home-projects"></div>
+
             </div>
         </section>
     </main>
@@ -443,6 +419,27 @@
             window.addEventListener('scroll', makeActive);
         });
     </script>
+<script>
+fetch('/assets/data/projects.json')
+  .then(response => response.json())
+  .then(projects => {
+    const container = document.getElementById('home-projects');
+
+    projects.slice(0, 4).forEach(project => {
+      const card = document.createElement('div');
+      card.className = 'hero-project-card';
+
+      card.innerHTML = `
+        <img src="${project.image}" alt="${project.title}">
+        <div class="hero-project-overlay">
+          <h4>${project.title}</h4>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  });
+</script>
 
 </body>
 </html>
