@@ -31,8 +31,46 @@
             background-color: var(--primary-bg);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevents horizontal scroll from smoke effect */
+            overflow-x: hidden;
+            position: relative;
         }
+
+        /* --- Moving White Lines --- */
+        .lines-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            opacity: 0.5;
+        }
+
+        .line-1 { width: 200px; top: 20%; left: -200px; transform: rotate(30deg); animation: moveLine1 8s linear infinite; }
+        .line-2 { width: 300px; top: 40%; left: -300px; transform: rotate(-20deg); animation: moveLine2 12s linear infinite; }
+        .line-3 { width: 150px; top: 60%; left: -150px; transform: rotate(45deg); animation: moveLine3 10s linear infinite; }
+        .line-4 { width: 250px; top: 80%; left: -250px; transform: rotate(-15deg); animation: moveLine4 15s linear infinite; }
+        .line-5 { width: 180px; top: 30%; left: -180px; transform: rotate(60deg); animation: moveLine5 9s linear infinite; }
+        .line-6 { width: 220px; top: 70%; left: -220px; transform: rotate(-30deg); animation: moveLine6 11s linear infinite; }
+        .line-7 { width: 280px; top: 10%; left: -280px; transform: rotate(15deg); animation: moveLine7 14s linear infinite; }
+        .line-8 { width: 160px; top: 50%; left: -160px; transform: rotate(-45deg); animation: moveLine8 7s linear infinite; }
+
+        @keyframes moveLine1 { 0% { transform: translateX(0) translateY(0) rotate(30deg); } 100% { transform: translateX(calc(100vw + 200px)) translateY(100px) rotate(30deg); } }
+        @keyframes moveLine2 { 0% { transform: translateX(0) translateY(0) rotate(-20deg); } 100% { transform: translateX(calc(100vw + 300px)) translateY(-50px) rotate(-20deg); } }
+        @keyframes moveLine3 { 0% { transform: translateX(0) translateY(0) rotate(45deg); } 100% { transform: translateX(calc(100vw + 150px)) translateY(80px) rotate(45deg); } }
+        @keyframes moveLine4 { 0% { transform: translateX(0) translateY(0) rotate(-15deg); } 100% { transform: translateX(calc(100vw + 250px)) translateY(-30px) rotate(-15deg); } }
+        @keyframes moveLine5 { 0% { transform: translateX(0) translateY(0) rotate(60deg); } 100% { transform: translateX(calc(100vw + 180px)) translateY(120px) rotate(60deg); } }
+        @keyframes moveLine6 { 0% { transform: translateX(0) translateY(0) rotate(-30deg); } 100% { transform: translateX(calc(100vw + 220px)) translateY(-70px) rotate(-30deg); } }
+        @keyframes moveLine7 { 0% { transform: translateX(0) translateY(0) rotate(15deg); } 100% { transform: translateX(calc(100vw + 280px)) translateY(40px) rotate(15deg); } }
+        @keyframes moveLine8 { 0% { transform: translateX(0) translateY(0) rotate(-45deg); } 100% { transform: translateX(calc(100vw + 160px)) translateY(-90px) rotate(-45deg); } }
 
         /* --- Animated Smoky Background Effect --- */
         body::before, body::after {
@@ -42,54 +80,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Place behind all content */
+            z-index: -2;
             opacity: 0.4;
         }
 
-        body::before {
-            background: radial-gradient(ellipse at top left, rgba(184, 184, 184, 0.2) 0%, transparent 50%);
-            animation: smoke-move-1 20s infinite alternate ease-in-out;
-        }
-
-        body::after {
-            background: radial-gradient(ellipse at bottom right, rgba(184, 184, 184, 0.15) 0%, transparent 50%);
-            animation: smoke-move-2 25s infinite alternate-reverse ease-in-out;
-        }
+        body::before { background: radial-gradient(ellipse at top left, rgba(184, 184, 184, 0.2) 0%, transparent 50%); animation: smoke-move-1 20s infinite alternate ease-in-out; }
+        body::after { background: radial-gradient(ellipse at bottom right, rgba(184, 184, 184, 0.15) 0%, transparent 50%); animation: smoke-move-2 25s infinite alternate-reverse ease-in-out; }
         
-        @keyframes smoke-move-1 {
-            0% { transform: translate(-10%, -10%) scale(1); }
-            100% { transform: translate(10%, 10%) scale(1.2); }
-        }
+        @keyframes smoke-move-1 { 0% { transform: translate(-10%, -10%) scale(1); } 100% { transform: translate(10%, 10%) scale(1.2); } }
+        @keyframes smoke-move-2 { 0% { transform: translate(10%, 10%) scale(1.1); } 100% { transform: translate(-10%, -10%) scale(1); } }
 
-        @keyframes smoke-move-2 {
-            0% { transform: translate(10%, 10%) scale(1.1); }
-            100% { transform: translate(-10%, -10%) scale(1); }
-        }
-
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        h1, h2, h3 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
         h1 { font-size: 3.5rem; }
         h2 { font-size: 2.5rem; text-align: center; margin-bottom: 50px; }
         h3 { font-size: 1.25rem; }
-
-        a {
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .section {
-            padding: 80px 0;
-        }
+        a { color: var(--text-primary); text-decoration: none; }
+        .section { padding: 80px 0; }
 
         /* --- Header & Navigation --- */
         .header {
@@ -106,14 +113,8 @@
 
         .nav-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
         }
 
         .nav-links {
@@ -122,15 +123,8 @@
             gap: 30px;
         }
 
-        .nav-links li {
-            position: relative; /* Needed for the underline effect */
-        }
-
-        .nav-links a {
-            transition: color 0.3s ease;
-            padding-bottom: 5px; /* Space for the underline */
-        }
-
+        .nav-links li { position: relative; }
+        .nav-links a { transition: color 0.3s ease; padding-bottom: 5px; }
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -141,299 +135,223 @@
             background-color: var(--accent-color);
             transition: width 0.3s ease-in-out;
         }
+        .nav-links a:hover::after { width: 100%; }
 
-        .nav-links a:hover::after {
+        /* --- Active Navigation Link (NEW) --- */
+        .nav-links a.active::after {
             width: 100%;
         }
 
         /* --- Hero Section --- */
-        #home {
+        #home { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+        
+        .hero-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .hero-image-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+        
+        .hero-img { 
+            width: 280px; 
+            height: 280px; 
+            border-radius: 50%; 
+            border: 5px solid var(--accent-color); 
+            object-fit: cover; 
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2); 
+        }
+
+        .hero-text-wrapper { text-align: left; }
+        .hero-text-wrapper h1 { margin-bottom: 10px; }
+        .hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 40px; }
+        
+        .btn { 
+            display: inline-flex; 
+            align-items: center;
+            padding: 12px 28px; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            transition: all 0.3s ease; 
+            text-decoration: none;
+        }
+        
+        .btn-secondary { 
+            border: 2px solid var(--accent-color); 
+            color: var(--accent-color); 
+        }
+        .btn-secondary:hover { 
+            background-color: var(--accent-color); 
+            color: var(--primary-bg); 
+        }
+        
+        .btn-secondary i {
+            margin-left: 8px;
+            font-size: 1rem;
+        }
+
+        /* --- Social Icons Container --- */
+        .social-icons-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            min-height: 100vh;
-            padding-top: 80px; /* Offset for fixed header */
-        }
-        
-        .hero-content {
-            max-width: 800px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            transition: all 0.3s ease;
         }
 
-        /* --- New Top Projects in Hero --- */
-        .hero-projects {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
+        .social-icon-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: translateY(-5px);
+        }
+
+        /* --- Hero Projects Grid --- */
+        .hero-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .hero-project-card {
-            overflow: hidden;
-            border-radius: 10px;
-            border: 1px solid #333;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            max-width: 200px;
-        }
-
-        .hero-project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(184, 184, 184, 0.2);
-        }
-
-        .hero-project-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .hero-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 5px solid var(--accent-color);
-            margin-bottom: 30px;
-            object-fit: cover;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 0 10px;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(184, 184, 184, 0.3);
-        }
-        
-        .btn-secondary {
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-        }
-
-        /* --- Why Me Section --- */
-        #why-me {
-            background-color: var(--secondary-bg);
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        .feature-card {
-            text-align: center;
-        }
-        .feature-card i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-        .feature-card h3 {
-            margin-bottom: 10px;
-        }
-        .feature-card p {
-            color: var(--text-secondary);
-        }
-
-        /* --- Services Section --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        .service-card {
-            background-color: var(--secondary-bg);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .service-card i {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-        .service-card h3 {
-            margin-bottom: 10px;
-        }
-        .service-card p {
-            color: var(--text-secondary);
-        }
-
-        /* --- Projects Section --- */
-        #projects {
-            background-color: var(--secondary-bg);
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        .project-card {
             position: relative;
             overflow: hidden;
             border-radius: 10px;
             cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #333;
         }
-        .project-card img {
+
+        .hero-project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .hero-project-card img {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
             display: block;
-            transition: transform 0.3s ease;
         }
-        .project-card:hover img {
-            transform: scale(1.1);
-        }
-        .project-overlay {
+        
+        .hero-project-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 15px;
             transform: translateY(100%);
             transition: transform 0.3s ease;
         }
-        .project-card:hover .project-overlay {
+
+        .hero-project-card:hover .hero-project-overlay {
             transform: translateY(0);
         }
-        .see-all-btn {
-            text-align: center;
-            margin-top: 50px;
+
+        .hero-project-overlay h4 {
+            font-size: 0.9rem;
+            color: var(--text-primary);
         }
 
-        /* --- Contact Section --- */
-        #contact {
-            background-color: var(--secondary-bg);
-            text-align: center;
-        }
-        
-        .contact-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .contact-text {
-            margin-bottom: 40px;
-            color: var(--text-secondary);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .social-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-10px);
-        }
-        
-        .social-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background-color: var(--primary-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            border: 2px solid var(--accent-color);
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover .social-icon {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-        }
-        
-        .social-icon i {
-            font-size: 30px;
-            color: var(--accent-color);
-        }
-        
-        .social-link:hover .social-icon i {
-            color: var(--primary-bg);
-        }
-        
-        .social-label {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
+        /* --- Why Me Section --- */
+        #why-me { background-color: var(--secondary-bg); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .feature-card { text-align: center; }
+        .feature-card i { font-size: 3rem; color: var(--accent-color); margin-bottom: 20px; }
+        .feature-card h3 { margin-bottom: 10px; }
+        .feature-card p { color: var(--text-secondary); }
+
+        /* --- Services Section --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .service-card { background-color: var(--secondary-bg); padding: 30px; border-radius: 10px; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .service-card i { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 15px; }
+        .service-card h3 { margin-bottom: 10px; }
+        .service-card p { color: var(--text-secondary); }
 
         /* --- Footer --- */
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid #222;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
+        .footer { text-align: center; padding: 30px 0; border-top: 1px solid #222; font-size: 0.9rem; color: var(--text-secondary); }
         
         /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .hero-projects-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
             .nav-links { gap: 15px; font-size: 0.9rem; }
-            .hero-img { width: 150px; height: 150px; }
-            .btn { margin: 5px; }
-            .hero-projects {
-                flex-direction: column;
-                align-items: center;
-            }
-            .social-links {
-                flex-wrap: wrap;
-            }
+            .hero-content { flex-direction: column; text-align: center; }
+            .hero-img { width: 200px; height: 200px; }
+            .hero-projects-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .hero-projects-grid { grid-template-columns: 1fr; }
         }
 
     </style>
 </head>
 <body>
 
+    <!-- ======== Moving White Lines ======== -->
+    <div class="lines-container">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+        <div class="line line-4"></div>
+        <div class="line line-5"></div>
+        <div class="line line-6"></div>
+        <div class="line line-7"></div>
+        <div class="line line-8"></div>
+    </div>
+
     <!-- ======== Header & Navigation ======== -->
     <header class="header">
         <div class="container nav-container">
-            <a href="#home" class="logo">ABDULLAH.M</a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="assets/resume.pdf" download="Abdullah_Resume.pdf">Resume</a></li>
                 </ul>
             </nav>
         </div>
@@ -442,23 +360,57 @@
     <main>
         <!-- ======== Hero Section ======== -->
         <section id="home" class="section">
-            <div class="hero-content">
-                <!-- === NEW: Top Projects === -->
-                <div class="hero-projects">
+            <div class="hero-wrapper">
+                <div class="hero-content">
+                    <div class="hero-image-wrapper">
+                        <img src="https://placehold.co/280x280/b8b8b8/000?text=ABDULLAH" alt="Profile Picture of Abdullah" class="hero-img">
+                        <a href="https://wa.link/09se1o" target="_blank" class="btn btn-secondary">Connect with Me <i class="fab fa-whatsapp"></i></a>
+                        
+                        <!-- ======== Social Icons ======== -->
+                        <div class="social-icons-container">
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=connectwithmreditor@gmail.com&su=Hello%20there&body=" target="_blank" class="social-icon-btn">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://www.instagram.com/connectwithmreditor/" target="_blank" class="social-icon-btn">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/connectwithmreditor/" target="_blank" class="social-icon-btn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-text-wrapper">
+                        <h1>MOHAMMED ABDULLAH</h1>
+                        <p class="hero-subtitle">Skilled Video Editor & Content Strategist with Adobe expertise. I help creators grow.</p>
+                    </div>
+                </div>
+                
+                <!-- ======== Hero Projects Grid ======== -->
+                <div class="hero-projects-grid">
                     <div class="hero-project-card">
                         <img src="https://placehold.co/400x250/333/fff?text=Adipurush+FX" alt="Adipurush vs Kalki Project">
+                        <div class="hero-project-overlay">
+                            <h4>Adipurush vs Kalki FX Breakdown</h4>
+                        </div>
                     </div>
                     <div class="hero-project-card">
                         <img src="https://placehold.co/400x250/333/fff?text=CTR+Thumbnail" alt="High CTR Thumbnail Project">
+                        <div class="hero-project-overlay">
+                            <h4>High CTR Thumbnail Design</h4>
+                        </div>
                     </div>
-                </div>
-
-                <img src="https://placehold.co/200x200/b8b8b8/000?text=ABDULLAH" alt="Profile Picture of Abdullah" class="hero-img">
-                <h1>MOHAMMED ABDULLAH</h1>
-                <p class="hero-subtitle">Skilled Video Editor & Content Strategist with Adobe expertise. I help creators grow.</p>
-                <div>
-                    <a href="#projects" class="btn btn-primary">See All Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Contact Now</a>
+                    <div class="hero-project-card">
+                        <img src="https://placehold.co/400x250/333/fff?text=Machan+Bro" alt="Machan Bro Mission Project">
+                        <div class="hero-project-overlay">
+                            <h4>Machan Bro Mission</h4>
+                        </div>
+                    </div>
+                    <div class="hero-project-card">
+                        <img src="https://placehold.co/400x250/333/fff?text=Comic+Con" alt="Chennai Comic Con Project">
+                        <div class="hero-project-overlay">
+                            <h4>Chennai Comic Con 2025</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -520,88 +472,45 @@
                 </div>
             </div>
         </section>
-
-        <!-- ======== Projects Section ======== -->
-        <section id="projects" class="section">
-            <div class="container">
-                <h2>Recent Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=Project+1" alt="Project 1 Thumbnail">
-                        <div class="project-overlay">
-                            <h4>Adipurush vs Kalki FX Breakdown</h4>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=Project+2" alt="Project 2 Thumbnail">
-                        <div class="project-overlay">
-                            <h4>High CTR Thumbnail Design</h4>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=Project+3" alt="Project 3 Thumbnail">
-                        <div class="project-overlay">
-                            <h4>Machan Bro Mission</h4>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="https://placehold.co/400x250/333/fff?text=Project+4" alt="Project 4 Thumbnail">
-                        <div class="project-overlay">
-                            <h4>Chennai Comic Con 2025</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="see-all-btn">
-                    <a href="#" class="btn btn-primary">See All Projects</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- ======== Contact Section ======== -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2>Get In Touch</h2>
-                <div class="contact-content">
-                    <p class="contact-text">Feel free to reach out to me for collaborations, projects, or just to say hello. I'm always open to discussing new opportunities and creative ideas.</p>
-                    
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/connectwithmreditor/" target="_blank" class="social-link">
-                            <div class="social-icon">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <span class="social-label">Instagram</span>
-                        </a>
-                        
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=connectwithmreditor@gmail.com&su=Hello%20there&body=" target="_blank" class="social-link">
-                            <div class="social-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <span class="social-label">Email</span>
-                        </a>
-                        
-                        <a href="https://wa.link/09se1o" target="_blank" class="social-link">
-                            <div class="social-icon">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <span class="social-label">WhatsApp</span>
-                        </a>
-                        
-                        <a href="https://www.linkedin.com/in/connectwithmreditor/" target="_blank" class="social-link">
-                            <div class="social-icon">
-                                <i class="fab fa-linkedin"></i>
-                            </div>
-                            <span class="social-label">LinkedIn</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- ======== Footer ======== -->
     <footer class="footer">
         <p>&copy; 2024 Mohammed Abdullah. All Rights Reserved. | Made with HTML & CSS</p>
     </footer>
+
+    <!-- ======== JavaScript for Active Navigation (NEW) ======== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            function makeActive() {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').slice(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Set the active link on initial load
+            makeActive();
+
+            // Update the active link on scroll
+            window.addEventListener('scroll', makeActive);
+        });
+    </script>
 
 </body>
 </html>
