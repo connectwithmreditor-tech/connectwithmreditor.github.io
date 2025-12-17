@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #C0C0C0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Background Lines */
+        .bg-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            perspective: 800px;
+        }
+        
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+            height: 1px;
+            width: 100%;
+            opacity: 0.5;
+            filter: blur(1px);
+            transform-style: preserve-3d;
+        }
+        
+        .line:nth-child(1) {
+            top: 10%;
+            animation: moveLine 15s infinite linear;
+            transform: rotateX(45deg) rotateZ(0deg);
+        }
+        
+        .line:nth-child(2) {
+            top: 25%;
+            animation: moveLine 20s infinite linear reverse;
+            transform: rotateX(45deg) rotateZ(90deg);
+        }
+        
+        .line:nth-child(3) {
+            top: 40%;
+            animation: moveLine 25s infinite linear;
+            transform: rotateX(45deg) rotateZ(180deg);
+        }
+        
+        .line:nth-child(4) {
+            top: 55%;
+            animation: moveLine 18s infinite linear reverse;
+            transform: rotateX(45deg) rotateZ(270deg);
+        }
+        
+        .line:nth-child(5) {
+            top: 70%;
+            animation: moveLine 22s infinite linear;
+            transform: rotateX(45deg) rotateZ(45deg);
+        }
+        
+        .line:nth-child(6) {
+            top: 85%;
+            animation: moveLine 30s infinite linear reverse;
+            transform: rotateX(45deg) rotateZ(135deg);
+        }
+        
+        @keyframes moveLine {
+            0% {
+                transform: translateX(-100%) rotateX(45deg) rotateZ(var(--rotation, 0deg));
+            }
+            100% {
+                transform: translateX(100%) rotateX(45deg) rotateZ(var(--rotation, 0deg));
+            }
+        }
+        
+        /* Vertical Lines */
+        .vertical-line {
+            position: absolute;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+            width: 1px;
+            height: 100%;
+            opacity: 0.5;
+            filter: blur(1px);
+            transform-style: preserve-3d;
+        }
+        
+        .vertical-line:nth-child(7) {
+            left: 15%;
+            animation: moveVerticalLine 18s infinite linear;
+            transform: rotateY(45deg) rotateX(0deg);
+        }
+        
+        .vertical-line:nth-child(8) {
+            left: 35%;
+            animation: moveVerticalLine 22s infinite linear reverse;
+            transform: rotateY(45deg) rotateX(90deg);
+        }
+        
+        .vertical-line:nth-child(9) {
+            left: 55%;
+            animation: moveVerticalLine 25s infinite linear;
+            transform: rotateY(45deg) rotateX(180deg);
+        }
+        
+        .vertical-line:nth-child(10) {
+            left: 75%;
+            animation: moveVerticalLine 20s infinite linear reverse;
+            transform: rotateY(45deg) rotateX(270deg);
+        }
+        
+        @keyframes moveVerticalLine {
+            0% {
+                transform: translateY(-100%) rotateY(45deg) rotateX(var(--rotation, 0deg));
+            }
+            100% {
+                transform: translateY(100%) rotateY(45deg) rotateX(var(--rotation, 0deg));
+            }
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #333333;
+            position: relative;
+            z-index: 10;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: #808080;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #C0C0C0;
+        }
+        
+        nav a.active {
+            color: #C0C0C0;
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #C0C0C0;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Why Me Section */
+        .why-me-section {
+            margin-top: 60px;
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            color: #E5E5E5;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #C0C0C0;
+        }
+        
+        .why-me-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .why-me-card {
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #2A2A2A;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .why-me-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(192, 192, 192, 0.1);
+            border-color: #3A3A3A;
+        }
+        
+        .why-me-icon {
+            font-size: 48px;
+            color: #C0C0C0;
+            margin-bottom: 20px;
+        }
+        
+        .why-me-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #E5E5E5;
+        }
+        
+        .why-me-description {
+            color: #A9A9A9;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Services Section */
+        .services-section {
+            margin-top: 40px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #2A2A2A;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(192, 192, 192, 0.1);
+            border-color: #3A3A3A;
+        }
+        
+        .service-icon {
+            font-size: 48px;
+            color: #C0C0C0;
+            margin-bottom: 20px;
+        }
+        
+        .service-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #E5E5E5;
+        }
+        
+        .service-description {
+            color: #A9A9A9;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid #333333;
+            color: #666666;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Lines -->
+    <div class="bg-lines">
+        <div class="line" style="--rotation: 0deg;"></div>
+        <div class="line" style="--rotation: 90deg;"></div>
+        <div class="line" style="--rotation: 180deg;"></div>
+        <div class="line" style="--rotation: 270deg;"></div>
+        <div class="line" style="--rotation: 45deg;"></div>
+        <div class="line" style="--rotation: 135deg;"></div>
+        <div class="vertical-line" style="--rotation: 0deg;"></div>
+        <div class="vertical-line" style="--rotation: 90deg;"></div>
+        <div class="vertical-line" style="--rotation: 180deg;"></div>
+        <div class="vertical-line" style="--rotation: 270deg;"></div>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="resume.html">Resume</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Why Me Section -->
+        <div class="why-me-section">
+            <h2 class="section-title">Why Me As Your Video <span class="highlight">Editor</span>?</h2>
+            
+            <div class="why-me-grid">
+                <!-- Skilled Professional -->
+                <div class="why-me-card">
+                    <div class="why-me-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="why-me-title">Skilled Professional</h3>
+                    <p class="why-me-description">Rich experience guaranteeing perfect execution for your project.</p>
+                </div>
+                
+                <!-- Multiple Editing Patterns -->
+                <div class="why-me-card">
+                    <div class="why-me-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3 class="why-me-title">Multiple Editing Patterns</h3>
+                    <p class="why-me-description">Knowledge of various editing styles to optimize different formats.</p>
+                </div>
+                
+                <!-- Client-Focused Creative -->
+                <div class="why-me-card">
+                    <div class="why-me-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="why-me-title">Client-Focused Creative</h3>
+                    <p class="why-me-description">I understand your needs first, then edit to bring your vision to life.</p>
+                </div>
+                
+                <!-- Creative Reels Editing -->
+                <div class="why-me-card">
+                    <div class="why-me-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="why-me-title">Creative Reels Editing</h3>
+                    <p class="why-me-description">Catchy edits and effects that grab attention and deliver your message.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Services Section -->
+        <div class="services-section">
+            <h2 class="section-title">Creative <span class="highlight">Services</span> Offered</h2>
+            
+            <div class="services-grid">
+                <!-- Video Editing Service -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="service-title">Video Editing</h3>
+                    <p class="service-description">Professional editing using Adobe Premiere Pro to create compelling narratives.</p>
+                </div>
+                
+                <!-- Sound Engineering Service -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3 class="service-title">Sound Engineering</h3>
+                    <p class="service-description">Audio mixing, cleanup, and sound design for a polished final product.</p>
+                </div>
+                
+                <!-- Logo Design Service -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="service-title">Logo Design</h3>
+                    <p class="service-description">Custom, memorable logos that build your brand identity.</p>
+                </div>
+                
+                <!-- 2D Animation Service -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="service-title">2D Animation</h3>
+                    <p class="service-description">Bringing stories and ideas to life with motion graphics and animation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Mohammed Abdullah. All rights reserved.</p>
+    </footer>
+</body>
+</html>
