@@ -1,26 +1,16 @@
 [
   {
     "title": "Adipurush FX",
-    "image": "/assets/projects/adipurush.jpg",
-    "description": "Visual effects work for the epic film Adipurush.",
-    "category": "VFX"
+    "image": "https://connectwithmreditor.pro/projects/assets/adipurush.jpg",
+    "description": "Visual effects work for Adipurush.",
+    "category": "vfx",
+    "date": "2024-08-20"
   },
   {
     "title": "CTR Thumbnail",
-    "image": "/assets/projects/ctr-thumbnail.jpg",
-    "description": "High-converting YouTube thumbnails.",
-    "category": "Thumbnails"
-  },
-  {
-    "title": "Machan Bro",
-    "image": "/assets/projects/machan-bro.jpg",
-    "description": "Complete video editing for a popular YouTube series.",
-    "category": "Video Editing"
-  },
-  {
-    "title": "Comic Con",
-    "image": "/assets/projects/comic-con.jpg",
-    "description": "Event coverage and cinematic edits.",
-    "category": "Video Editing"
+    "image": "https://connectwithmreditor.pro/projects/assets/ctr.jpg",
+    "description": "High converting thumbnails.",
+    "category": "thumbnail",
+    "date": "2024-09-01"
   }
 ]
